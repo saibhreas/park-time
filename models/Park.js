@@ -13,15 +13,25 @@ Park.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    phone_number: {
-      type: DataTypes.INTEGER,
+    park_id: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     activities: {
-      type: DataTypes.STRING,
-      allowNull: true,
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
     },
     fees: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
+    admission: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
+    weather: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -33,7 +43,6 @@ Park.init(
   },
   {
     sequelize,
-    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: 'park'
