@@ -1,0 +1,36 @@
+{
+  "name": "parks-out",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "nodemon": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saibhreas/parks-out.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.7",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "sequelize": "^6.6.2"
+  },
+  "bugs": {
+    "url": "https://github.com/saibhreas/parks-out/issues"
+  },
+  "homepage": "https://github.com/saibhreas/parks-out#readme"
+}
