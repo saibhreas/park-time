@@ -1,0 +1,32 @@
+[
+  {
+    "id":"01",
+    "name": "Sal",
+    "email": "sal@hotmail.com",
+    "password": "password1234"
+  },
+  {
+    "id":"02",
+    "name": "Lernantino",
+    "email": "lernantino@gmail.com",
+    "password": "coolPw2020"
+  },
+  {
+    "id":"03",
+    "name": "Amiko",
+    "email": "amiko2k20@aol.com",
+    "password": "amiko2k20!"
+  },
+  {
+    "id":"04",
+    "name": "josho",
+    "email": "josho2k20@aol.com",
+    "password": "josho2k20!"
+  },
+  {
+    "id":"05",
+    "name": "Chris",
+    "email": "rando2k20@aol.com",
+    "password": "rando2k20!"
+  }
+]
