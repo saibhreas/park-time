@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="Description" content="App that pools up to date data on National Parks in New Jersey" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+
+  <link rel="stylesheet" href="./assets/css/scafStyle.css" />
+  <title>Park Out</title>
+</head>
+
+<body>
+  <main id="container0" class="flex">
+    <header class="header">
+      <!-- Background image -->
+      <div class="p-5 header" style="
+            background-image: url('./assets/img/Delgap1.jpg');
+            height: 100vh;
+            background-size: cover;">
+        <!--park out original-->
+        <section id="where2-go" class="container row">
+          <div class="col-md-4"></div>
+          <div class="card col-md-6">
+            <a href="#home" class="btn btn-escape mb-1">exit</a>
+
+            <h2>Where would you like to go?</h2>
+            <p>
+              <bold>Park Out</bold> will help you pick the right spot in New Jersey for your walk in the park.
+            </p>
+            <p>Choose from the drop down menu the park you are interseted in.
+            </p>
+            <p>Then choose what information you need, like the current weather, admission information, or if there are
+              activities conducted by the park.
+            </p>
+            <h3><em>Then Take a Hike!</em></h3>
+            <h5 class="card-title">New Jersey’s Parks</h5>
+            <p class="card-text">Choose a park from the drop down menu</p>
+            <button type="submit" class="btn btn-secondary ropdown-toggle" id="search-park" onclick="npsApiCall('NJ')"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="get-park-names">Pick a NJ
+              Park</button>
+            <div class="dropdown-menu" id="myList" aria-labelledby="dropdownMenuButton">
+            </div>
+          </div>
+        </section>
+
+
+        <!--Check Box   user choice-->
+        <section id="park-info-requests" class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <a href="#home" class="btn btn-escape mb-1">exit</a>
+              <fieldset class="group" onsubmit="return onSubmitData(event)">
+                <legend>What information can we help you with?</legend>
+                <ul class="checkbox">
+                  <li>
+                    <input type="checkbox" id="admission" value="admisson" />
+                    <label for="cb1">Admission</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="activities" value="activities" />
+                    <label for="cb2">Activities</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="fees" value="fees" />
+                    <label for="cb3">Fees</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="weather" value="weather" />
+                    <label for="cb4">Weather</label>
+                  </li>
+
+                </ul>
+              </fieldset>
+              <button class="btn btn-block btn-info" onclick="clickSubmit()" id="hide-weather">Submit Form</button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!--     container for Park Info -->
+        <section id="weather-info" class="container">
+          <div class="row card col-md-6 dark">
+            <a href="#home" class="btn btn-escape mb-1">exit</a>
+            <span id="spancontact" style="display: none;">Phone Number :- <span id="spanphoneNumber"></span>
+              <br>
+              Email :- <span id="spanEmail"></span>
+            </span>
+            <br>
+            <span id="spanActivity"></span>
+            <br>
+            <span id="spanFees"></span>
+          </div>
+
+
+          <!--Container for Weather Info-->
+          <div class="row card col-md-6 dark">
+            <div data-index="0" id="current-weather-container">
+              <div id="map"></div>
+            </div>
+          </div>
+        </section>
+        <!--container for maps-->
+        <section id="maps" class="container text-right planner-div">
+          <div class="col-md-2"></div>
+          <div class="card col-md-8">
+            <a href="#home" class="btn btn-escape mb-1">exit</a>
+            <h1 class="display-4">Place for MAPS to go </h1>
+          </div>
+        </section>
+      </div>
+    </header>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.js"></script>
+</body>
+
+</html>
+<!-- -->

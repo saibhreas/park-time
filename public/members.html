@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="Description" content="App that pools up to date data on National Parks in New Jersey" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+
+  <link rel="stylesheet" href="./assets/css/scafStyle.css" />
+  <title>Park Out</title>
+</head>
+
+<body>
+  <main id="container0" class="flex">
+    <header class="header">
+      <!-- Background image -->
+      <div class="p-5 header" style="
+            background-image: url('./assets/img/Delgap1.jpg');
+            height: 100vh;
+            background-size: cover;
+          ">
+        <div>
+          <div class="d-flex justify-content-left align-items-center h-100">
+            <div>
+              <a href="index.html">GO Home Here</a>
+              <br />
+              <a href="/api/v1/auth/logout">Logout</a>
+              <h1 class="mb-3">Park Out</h1>
+              <h4 class="mb-3">
+                The place to check out before you head out!
+              </h4>
+            </div>
+          </div>
+        </div>
+        <!-------------------------------------------------------------------------------------
+              -->
+        <section id="member-choice1" class="container row">
+          <div class="col-md-4"></div>
+          <div class="card col-md-6 py-2" {text-align: left}>
+            <h1>What would you like to do?</h1>
+            <p>Look up a new park</p>
+            <a href="where2Go.html" type="park-out" class="btn park-out mb-1">
+              Search for a Park
+            </a>
+
+            <p>Schedule your park activities</p>
+            <a href="planner.html" type="day-planner" class="btn day-planner-db mb-1">
+              Plan your day
+            </a>
+
+            <p>Retrieive or Add a note about a park</p>
+            <a href="note.html" type="notes" class="btn notes-db mb-1">Notes</a>
+          </div>
+        </section>
+
+        <!------------------------------------------------------------------------------------------->
+      </div>
+    </header>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.js"></script>
+  <script src="./js/members.js"></script>
+</body>
+
+</html>
+<!-- -->

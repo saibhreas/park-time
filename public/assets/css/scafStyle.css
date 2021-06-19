@@ -1,0 +1,97 @@
+/*comments to ssatisfy a push*/
+body {
+  font-family: "PT Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1;
+  color: hsl (32, 50%, 12%);
+}
+.btn {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #09424b;
+}
+.btn-cancel {
+  color: #fff;
+  background-color: #ec2525a6;
+  border-color: rgb(48, 5, 5);
+}
+.btn-escape {
+  color: #fff;
+  background-color: #d8eb96dc;
+  border-color: rgb(109, 119, 95);
+}
+.card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+.card-search {
+  border: #4bacb8;
+}
+
+.header {
+  text-align: left;
+
+  color: rgb(4, 6, 10);
+  border-radius: 5;
+  border-bottom: 5px solid rgb(24, 23, 21);
+}
+.header h1,
+h4 {
+  text-shadow: 2px 2px #151418;
+  color: rgb(187, 209, 240);
+}
+
+.dark {
+  background-color: #2f3d41;
+  color: blanchedalmond;
+}
+
+.bgimage {
+  max-height: 600;
+
+  background: url(../img/DelGApHero3.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.bgimage h5 {
+  text-shadow: 2px 2px #333;
+}
+
+.main {
+  background-image: url(../img/Delgap1.jpg);
+  max-width: 100%;
+  max-height: fit-content;
+  background-size: cover;
+}
+.container2 {
+  margin-top: 50px;
+}
+
+.hide {
+  display: none;
+}
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+/* Small devices (tablets, 768px and up) */
+
+@media (min-width: 768px) {
+  .col-md {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+}
