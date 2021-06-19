@@ -17,7 +17,7 @@ passport.use(
       db.User.findOne({//means we are suing model
         where: {
           email: email
-        }
+        },
       }).then(dbUser => {
         // If there's no user with the given email, throw error
         if (!dbUser) {
@@ -43,13 +43,13 @@ passport.use(
 // Just consider this part boilerplate needed to make it all work
 passport.serializeUser((user, cb) => {
   console.log("passport.serializeUser");
-
+  delete user.password;
   cb(null, user);
 });
 
 passport.deserializeUser((obj, cb) => {
   console.log("passport.deserializeUser");
-
+  delete obj.password;
   cb(null, obj);
 });
 

@@ -5,7 +5,16 @@ const isAuthenticated = require("../../config/middleware/isAuthenticated");
 // GET all galleries for homepage
 router.get("/", (req, res) => {
   console.log("GET /");
-  // If the user already has an account send them to the members page
+  // If the user already has an account send them to the where2go page
+  if (req.user) {
+    res.redirect("/where2go");
+  }
+  res.sendFile(path.join(__dirname, "../../public/index.html"));
+});
+
+router.get("/signup", (req, res) => {
+  console.log("GET /signup");
+  // If the user already has an account send them to the where2go page
   if (req.user) {
     res.redirect("/where2go");
   }
@@ -14,7 +23,7 @@ router.get("/", (req, res) => {
 
 router.get("/login", (req, res) => {
   console.log("GET /login");
-  // If the user already has an account send them to the members page
+  // If the user already has an account send them to the where2go page
   if (req.user) {
     res.redirect("/where2go");
   }
@@ -25,8 +34,12 @@ router.get("/login", (req, res) => {
 // If a user who is not logged in tries to access this route they will be redirected to the signup page
 router.get("/where2go", isAuthenticated, (req, res) => {
   console.log("GET /where2go");
-  // console.trace();
   res.sendFile(path.join(__dirname, "../../public/where2go.html"));
+});
+
+router.get("/home", (req, res) => {
+  console.log("GET /home");
+  res.sendFile(path.join(__dirname, "../../public/index.html"));
 });
 
 module.exports = router;

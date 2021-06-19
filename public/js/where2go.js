@@ -1,4 +1,6 @@
-var phonenumber,
+var parks,
+  currentPIndex,
+  phonenumber,
   email,
   activity,
   fees,
@@ -35,78 +37,79 @@ function mapQuestApiCall(x, y) {
 
 //*! Weather Information
 function getFiveDayWeatherApi(lat, lon) {
-  var city = $("#city-name").val();
-  console.log("current searched was: ", city);
   var fiveDayUrlApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely,current,alerts&units=imperial&appid=${apiKey}`;
   console.log("fivedayURL: ", fiveDayUrlApi);
   $.ajax({
     url: fiveDayUrlApi,
     success: function (response) {
-      console.log("object extracted: ", response);
-      console.log(response.daily[0].dt);
-      //for (var i = 0; i < 6; i++) {
 
-      var i = 0;
-      var weather = response.daily[i].weather[0].description;
-      var icon = response.daily[i].weather[0].icon;
-      var temp = response.daily[i].temp.day;
-      var uvi = response.daily[i].uvi;
-      var iconImage = $("<img>").attr(
-        "src",
-        `http://openweathermap.org/img/wn/${icon}@2x.png`
-      );
-      console.log(iconImage);
-      console.log(response.daily[i].temp.day);
-      console.log("div" + '[data-index="' + i + '"]');
-      $("div" + '[data-index="' + i + '"]').append(
-        " weather: " + weather,
-        iconImage,
-        "<br>",
-        " temp: " + temp,
-        "<br>",
-        " uv index: " + uvi
-      );
-      console.log(uvi);
-      storeObj = {
-        weather: weather,
-        icon: icon,
-        temp: temp,
-        uvi: uvi,
-      };
-      //*! Must store value entered by userinput to user storage
-      localStorage.setItem(city + " day-" + i, JSON.stringify(storeObj));
-      //};
+      $('#list-of-weather-forecast').show();
+      for (const elem of response.daily) {
+        var weather = elem.weather[0].description;
+        var icon = elem.weather[0].icon;
+        var temp = elem.temp.day;
+        var uvi = elem.uvi;
+        var iconImage = $("<img>").attr(
+          "src",
+          `http://openweathermap.org/img/wn/${icon}@2x.png`
+        );
+        $('#list-of-weather-forecast').append(`
+          <div class="weather-day">
+           Weather: ${weather}
+           Temperature: ${temp}
+           UV Index: ${uvi}
+           <img src="http://openweathermap.org/img/wn/${icon}@2x.png" />
+          </div>
+        `);
+      }
     },
     error: function (xhr, status, error) {
       console.log("status: ", status);
       console.log("error: ", error);
-    },
-    complete: function (xhr, status) {
-      console.log("complete: ", status);
-    },
+    }
   });
+
 }
 
 // Calls all information needed for the User
 function clickSubmit() {
-  $("#park-info-requestsdivInformation").show();
-  if ($("#admission").is(":checked")) {
-    $("#spancontact").show();
-    $("#spanphoneNumber").text(phonenumber);
-    $("#spanEmail").text(email);
-  } else {
-    $("#spancontact").hide();
-  }
-  if ($("#activities").is(":checked")) {
-    $("#spanActivity").text(activity);
-  }
-  if ($("#fees").is(":checked")) {
-    $("#spanFees").text(fees);
-  }
-  if ($("#weather").is(":checked")) {
-    getFiveDayWeatherApi(lat, lon);
-  }
 
+  const currentPark = parks[currentPIndex];
+
+  const admission = $('#admission').is(':checked');
+  const activities = $('#activities').is(':checked');
+  const fees = $('#fees').is(':checked');
+  const weather = $('#weather').is(':checked');
+
+  $.post("/api/v1/park", {
+    name: currentPark.fullName,
+    park_id: currentPark.id,
+    admission,
+    activities,
+    fees,
+    weather
+  })
+    .then(data => {
+      console.log('Park was saved', data);
+      // If weather checkbox is checked
+      if (weather) {
+        getFiveDayWeatherApi(currentPark.latitude, currentPark.longitude);
+      }
+    })
+    .catch(err => {
+      handleLoginErr(err.responseJSON)
+    });
+
+}
+
+function showListOfParks() {
+  $.get("/api/v1/park")
+    .then(data => {
+
+    })
+    .catch(err => {
+      handleLoginErr(err.responseJSON)
+    });
 }
 
 $("#hide-weather").click(function () {
@@ -115,41 +118,14 @@ $("#hide-weather").click(function () {
 
 // Getting Answers from NPS Park API
 function getAnswer(e, pIndex) {
-  // You are just getting data here and not using the values
-  // of these variables (activity, fees, lat, lon)
 
-  // Moreover, I would not overcomplicate the workflow with 
-  // multiple html files. Rather I would keep all sections
-  // inside one html file (where2go.html), and when user goes to next step
-  // we just hide a section (with jquery) and show the next one.
-  // Until we have all the data collected, ready to send to the api.
   e.preventDefault();
-  var data = JSON.parse(sessionStorage.getItem(pIndex.toString()));
-  var contactP = data.contacts;
-  if (contactP != null && contactP.phoneNumbers.length > 0) {
-    phonenumber = contactP.phoneNumbers[0].phoneNumber;
-  }
-  // Check if we want keep email info
-  if (contactP != null && contactP.emailAddresses.length > 0) {
-    email = contactP.emailAddresses[0].emailAddresses;
-  }
-  activity = data.activities[0]?.name || '';
-  fees = data.entranceFees[0]?.cost || '';
-  lat = data.latitude;
-  lon = data.longitude;
-  $("#spanphoneNumber").text("");
-  $("#spanEmail").text("");
-  $("#spanActivity").text("");
-  $("#spanFees").text("");
-  $("#divInformation").hide();
+  currentPIndex = pIndex;
+  const currentPark = parks[pIndex];
 
-  // TODO - Get answers from API ?
-
-
-  // When API request is successful, you hide current section
-  // and show next one
   $('#where2-go').hide();
   $('#park-info-requests').show();
+  $('#selected-park').text(currentPark.fullName);
 }
 
 // Fetching Data from NPS API
@@ -160,21 +136,12 @@ function npsApiCall(parkNJ) {
   $.ajax({
     url: npsUrl,
     success: function (response) {
-      console.log(response.data);
+      parks = response.data;
       $("#myList").empty();
       for (let i = 0; i < response.data.length; i++) {
         var nameP = response.data[i].fullName;
-        var latP = response.data[i].latitude;
-        var longP = response.data[i].longitude;
-        sessionStorage.removeItem(i.toString());
-        sessionStorage.setItem(i.toString(), JSON.stringify(response.data[i]));
-        $("#myList").append(
-          "<a class='dropdown-item' href='dataResult.html' onclick='getAnswer(event," +
-          i.toString() +
-          ")'>" +
-          nameP +
-          "</a>"
-        );
+
+        $("#myList").append(`<a class='dropdown-item' onclick='getAnswer(event, ${i.toString()})'>${nameP}</a>`);
       }
 
     },
@@ -193,6 +160,8 @@ function npsApiCall(parkNJ) {
 $(document).ready(function () {
 
   $('#park-info-requests').hide();
+  $('#list-of-parks').hide();
+  $('#list-of-weather-forecast').hide();
   npsApiCall('NJ');
 
 
