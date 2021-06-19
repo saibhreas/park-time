@@ -24,11 +24,17 @@
         <div>
           <div class="d-flex justify-content-left align-items-center h-100">
             <div>
-              <a href="index.html">GO Home Here</a>
-              <br>
-              <a href="/api/v1/auth/logout">Logout</a>
 
               <h1 class="mb-3">Park Out</h1>
+
+              <a href="/home">Home Page</a>
+              <br><br>
+              <a href="/api/v1/auth/logout">Logout</a>
+              <br><br>
+              <a href="javascript:;" onclick="showListOfParks()">View List of Parks</a>
+              <br>
+              <br>
+
               <h4 class="mb-3">
                 The place to check out before you head out!
               </h4>
@@ -68,11 +74,12 @@
 
 
 
-        <!--Check Box   user choice-->
+        <!--Check Box user choice-->
         <section id="park-info-requests" class="col-md-6">
           <div class="card">
             <div class="card-body">
-              <a href="#home" class="btn btn-escape mb-1">exit</a>
+              <h3 id="selected-park"></h3>
+              <hr>
               <fieldset class="group" onsubmit="return onSubmitData(event)">
                 <legend>What information can we help you with?</legend>
                 <ul class="checkbox">
@@ -100,6 +107,22 @@
             </div>
           </div>
         </section>
+
+        <section id="list-of-weather-forecast" class="container row">
+          <div class="col-md-4"></div>
+          <div class="card col-md-6 py-3">
+
+          </div>
+        </section>
+
+        <section id="list-of-parks" class="container row">
+          <div class="col-md-4"></div>
+          <div class="card col-md-6 py-3">
+            <h5 class="card-title">New Jersey's Parks</h5>
+            <p class="card-text">Date: 02-02-2022</p>
+          </div>
+        </section>
+
 
       </div>
     </header>
