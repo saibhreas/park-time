@@ -44,7 +44,10 @@ function getFiveDayWeatherApi(lat, lon) {
     success: function (response) {
 
       $('#list-of-weather-forecast').show();
-      for (const elem of response.daily) {
+      $('#list-of-weather-forecast').empty();
+
+      for (let i = 0; i < 5; i++) {
+        const elem = response.daily[i];
         var weather = elem.weather[0].description;
         var icon = elem.weather[0].icon;
         var temp = elem.temp.day;
@@ -54,10 +57,10 @@ function getFiveDayWeatherApi(lat, lon) {
           `http://openweathermap.org/img/wn/${icon}@2x.png`
         );
         $('#list-of-weather-forecast').append(`
-          <div class="weather-day">
-           Weather: ${weather}
-           Temperature: ${temp}
-           UV Index: ${uvi}
+          <div class="weather-day col my-5 mr-2 p-2">
+           <span class="mb-1"><b>Weather:</b> ${weather}</span>
+           <span class="mb-1"><b>Temperature:</b> ${temp}</span>
+           <span class="mb-1"><b>UV Index:</b> ${uvi}</span>
            <img src="http://openweathermap.org/img/wn/${icon}@2x.png" />
           </div>
         `);
@@ -71,20 +74,21 @@ function getFiveDayWeatherApi(lat, lon) {
 
 }
 
-// Calls all information needed for the User
+
 function clickSubmit() {
 
   const currentPark = parks[currentPIndex];
 
-  const admission = $('#admission').is(':checked');
+  const contact = $('#contact').is(':checked');
   const activities = $('#activities').is(':checked');
   const fees = $('#fees').is(':checked');
   const weather = $('#weather').is(':checked');
+  console.log(currentPark);
 
   $.post("/api/v1/park", {
     name: currentPark.fullName,
     park_id: currentPark.id,
-    admission,
+    contact,
     activities,
     fees,
     weather
@@ -95,17 +99,56 @@ function clickSubmit() {
       if (weather) {
         getFiveDayWeatherApi(currentPark.latitude, currentPark.longitude);
       }
+      if (contact) {
+        $('#contacts').show();
+        $('#contacts').empty();
+        $('#contacts').append(`<b>Contacts:</b> <br />`);
+        $('#contacts').append(`
+          <p>${currentPark.contacts.emailAddresses.map(e => e.emailAddress).join(', ')}</p>
+          <p>${currentPark.contacts.phoneNumbers.map(e => e.phoneNumber).join(', ')}</p>
+        `);
+      }
+      if (activities) {
+        $('#activities').show();
+        $('#activities').empty();
+        $('#activities').append(`<b>Activities:</b> <br />`);
+        $('#activities').append(`<p>${currentPark.activities.map(e => e.name).join(', ')}</p>`);
+      }
+      if (fees) {
+        $('#fees').show();
+        $('#fees').empty();
+        $('#fees').append(`<b>Fees:</b> <br />`);
+        $('#fees').append(`<p>${currentPark.fees.map(e => e.emailAddress).join(', ')}</p>`);
+      }
     })
     .catch(err => {
       handleLoginErr(err.responseJSON)
     });
-
 }
 
 function showListOfParks() {
+  // Hide all sections besides list of parks
+  $('#list-of-weather-forecast').hide();
+  $('#park-info-requests').hide();
+  $('#where2-go').hide();
+  $('.park-info-item').hide();
+  $('#list-of-parks').show();
+  $('#list-of-parks').html('');
+
   $.get("/api/v1/park")
     .then(data => {
-
+      for (const elem of data) {
+        const checkedInfos = `${elem.activities ? 'Activites, ': ''}${elem.fees ? 'Fees, ': ''}${elem.contact ? 'Contact, ': ''}${elem.weather ? 'Weather, ': ''}`;
+        $('#list-of-parks').append(`
+          <div class="card col-md-8 py-1 mb-3">
+            <h5 class="card-title">${elem.name}</h5>
+            <p class="card-text">
+              <span>Date: ${new Date(elem.createdAt).toLocaleString()}</span>
+              <span class="ml-3">${checkedInfos}</span>
+            </p>
+          </div>
+        `);
+      }
     })
     .catch(err => {
       handleLoginErr(err.responseJSON)
@@ -162,6 +205,7 @@ $(document).ready(function () {
   $('#park-info-requests').hide();
   $('#list-of-parks').hide();
   $('#list-of-weather-forecast').hide();
+  $('.park-info-item').hide();
   npsApiCall('NJ');
 
 

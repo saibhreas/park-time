@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%;">
 
 <head>
   <meta charset="UTF-8" />
@@ -12,13 +12,12 @@
   <title>Park Out</title>
 </head>
 
-<body>
-  <main id="container0" class="flex">
-    <header class="header">
+<body class=" h-100">
+  <main id="container0" class="flex h-100">
+    <header class="header h-100">
       <!-- Background image -->
-      <div class="p-5 header" style="
+      <div class="p-5 header h-100" style="
             background-image: url('./assets/img/Delgap1.jpg');
-            height: 100vh;
             background-size: cover;
           ">
         <div>
@@ -44,7 +43,7 @@
 
 
 
-
+        <!-- Step 1 - Choose Park -->
         <section id="where2-go" class="container row">
           <div class="col-md-4"></div>
           <div class="card col-md-6 py-3">
@@ -58,13 +57,13 @@
             </p>
             <p>
               Then choose what information you need, like the current weather,
-              admission information, or if there are activities conducted by
+              contact information, or if there are activities conducted by
               the park.
             </p>
             <h3><em>Then Take a Hike!</em></h3>
             <h5 class="card-title">New Jersey's Parks</h5>
             <p class="card-text">Choose a park from the drop down menu</p>
-            <button type="submit" class="btn btn-secondary ropdown-toggle" id="search-park" data-toggle="dropdown"
+            <button type="submit" class="btn btn-secondary dropdown-toggle" id="search-park" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false" id="get-park-names">
               Pick a NJ Park
             </button>
@@ -74,53 +73,67 @@
 
 
 
-        <!--Check Box user choice-->
-        <section id="park-info-requests" class="col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <h3 id="selected-park"></h3>
-              <hr>
-              <fieldset class="group" onsubmit="return onSubmitData(event)">
-                <legend>What information can we help you with?</legend>
-                <ul class="checkbox">
-                  <li>
-                    <input type="checkbox" id="admission" value="admisson" />
-                    <label for="cb1">Admission</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" id="activities" value="activities" />
-                    <label for="cb2">Activities</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" id="fees" value="fees" />
-                    <label for="cb3">Fees</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" id="weather" value="weather" />
-                    <label for="cb4">Weather</label>
-                  </li>
+        <div class="row">
 
-                </ul>
-              </fieldset>
-              <button class="btn btn-block btn-info" onclick="clickSubmit()" id="hide-weather">Submit Form</button>
-              </form>
+
+          <!--Check Box user choice-->
+          <section id="park-info-requests" class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h3 id="selected-park"></h3>
+                <hr>
+                <fieldset class="group" onsubmit="return onSubmitData(event)">
+                  <legend>What information can we help you with?</legend>
+                  <ul class="checkbox">
+                    <li>
+                      <input type="checkbox" id="contact" value="contact" />
+                      <label for="cb1">Contact</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="activities" value="activities" />
+                      <label for="cb2">Activities</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="fees" value="fees" />
+                      <label for="cb3">Fees</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="weather" value="weather" />
+                      <label for="cb4">Weather</label>
+                    </li>
+
+                  </ul>
+                </fieldset>
+                <button class="btn btn-block btn-info" onclick="clickSubmit()" id="hide-weather">Submit Form</button>
+                </form>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section id="list-of-weather-forecast" class="container row">
-          <div class="col-md-4"></div>
-          <div class="card col-md-6 py-3">
+          <section id="park-info" class="col-md-6">
 
-          </div>
-        </section>
+            <div id="contacts" class="park-info-item p-2 mb-3">
+            </div>
 
+            <div id="activities" class="park-info-item p-2 mb-3">
+            </div>
+            
+            <div id="fees" class="park-info-item p-2 mb-3">
+            </div>
+
+            <!-- List of weather for 5 days -->
+            <section id="list-of-weather-forecast" class="row">
+             </section>
+        
+          </section>
+
+        </div>
+
+
+
+
+        <!-- List of previous park requests -->
         <section id="list-of-parks" class="container row">
-          <div class="col-md-4"></div>
-          <div class="card col-md-6 py-3">
-            <h5 class="card-title">New Jersey's Parks</h5>
-            <p class="card-text">Date: 02-02-2022</p>
-          </div>
         </section>
 
 
