@@ -25,7 +25,7 @@ Park.init(
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    admission: {
+    contact: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },

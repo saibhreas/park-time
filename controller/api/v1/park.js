@@ -23,6 +23,7 @@ router.get("/", isAuthenticated, function (req, res) {
 // [POST] /api/v1/park
 router.post("/", isAuthenticated, function (req, res) {
     console.log("POST /api/v1/park: ", req.body);
+    req.body.user_id = req.user.id;
     db.Park.create(req.body)
         .then(() => {
             console.log('Park stored successfully.');
