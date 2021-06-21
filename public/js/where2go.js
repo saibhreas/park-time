@@ -78,6 +78,7 @@ function getFiveDayWeatherApi(lat, lon) {
 function clickSubmit() {
 
   $('.park-info-item').hide();
+  $('#park-info').hide();
 
   const currentPark = parks[currentPIndex];
 
@@ -97,6 +98,7 @@ function clickSubmit() {
   })
     .then(data => {
       console.log('Park was saved', data);
+      $('#park-info').show();
       // If weather checkbox is checked
       if (weather) {
         getFiveDayWeatherApi(currentPark.latitude, currentPark.longitude);
@@ -130,9 +132,9 @@ function clickSubmit() {
 
 function showListOfParks() {
   // Hide all sections besides list of parks
-  $('#list-of-weather-forecast').hide();
   $('#park-info-requests').hide();
   $('#where2-go').hide();
+  $('#park-info').hide();
   $('.park-info-item').hide();
   $('#list-of-parks').show();
   $('#list-of-parks').html('');
@@ -206,8 +208,8 @@ $(document).ready(function () {
 
   $('#park-info-requests').hide();
   $('#list-of-parks').hide();
-  $('#list-of-weather-forecast').hide();
   $('.park-info-item').hide();
+  $('#park-info').hide();
   npsApiCall('NJ');
 
 
