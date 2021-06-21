@@ -77,11 +77,13 @@ function getFiveDayWeatherApi(lat, lon) {
 
 function clickSubmit() {
 
+  $('.park-info-item').hide();
+
   const currentPark = parks[currentPIndex];
 
   const contact = $('#contact').is(':checked');
   const activities = $('#activities').is(':checked');
-  const fees = $('#fees').is(':checked');
+  const fees = $('#fee').is(':checked');
   const weather = $('#weather').is(':checked');
   console.log(currentPark);
 
@@ -109,10 +111,10 @@ function clickSubmit() {
         `);
       }
       if (activities) {
-        $('#activities').show();
-        $('#activities').empty();
-        $('#activities').append(`<b>Activities:</b> <br />`);
-        $('#activities').append(`<p>${currentPark.activities.map(e => e.name).join(', ')}</p>`);
+        $('#activities-list').show();
+        $('#activities-list').empty();
+        $('#activities-list').append(`<b>Activities:</b> <br />`);
+        $('#activities-list').append(`${currentPark.activities.map(e => `<p>${e.name}</p>`).join('')}`);
       }
       if (fees) {
         $('#fees').show();
@@ -138,7 +140,7 @@ function showListOfParks() {
   $.get("/api/v1/park")
     .then(data => {
       for (const elem of data) {
-        const checkedInfos = `${elem.activities ? 'Activites, ': ''}${elem.fees ? 'Fees, ': ''}${elem.contact ? 'Contact, ': ''}${elem.weather ? 'Weather, ': ''}`;
+        const checkedInfos = `${elem.activities ? 'Activites, ' : ''}${elem.fees ? 'Fees, ' : ''}${elem.contact ? 'Contact, ' : ''}${elem.weather ? 'Weather, ' : ''}`;
         $('#list-of-parks').append(`
           <div class="card col-md-8 py-1 mb-3">
             <h5 class="card-title">${elem.name}</h5>
