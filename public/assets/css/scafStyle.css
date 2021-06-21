@@ -112,3 +112,7 @@ h4 {
   height: 400px;
   overflow-y: auto;
 }
+.scrollable-park-info {
+  overflow-y: auto;
+    height: 700px;
+}
