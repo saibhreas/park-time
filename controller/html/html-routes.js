@@ -3,14 +3,6 @@ const path = require("path");
 const isAuthenticated = require("../../config/middleware/isAuthenticated");
 
 // GET all galleries for homepage
-router.get("/", (req, res) => {
-  console.log("GET /");
-  // If the user already has an account send them to the where2go page
-  if (req.user) {
-    res.redirect("/where2go");
-  }
-  res.sendFile(path.join(__dirname, "../../public/index.html"));
-});
 
 router.get("/signup", (req, res) => {
   console.log("GET /signup");
@@ -39,6 +31,15 @@ router.get("/where2go", isAuthenticated, (req, res) => {
 
 router.get("/home", (req, res) => {
   console.log("GET /home");
+  res.sendFile(path.join(__dirname, "../../public/index.html"));
+});
+
+router.get("/", (req, res) => {
+  console.log("GET /");
+  // If the user already has an account send them to the where2go page
+  if (req.user) {
+    res.redirect("/where2go");
+  }
   res.sendFile(path.join(__dirname, "../../public/index.html"));
 });
 
