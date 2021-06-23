@@ -34,7 +34,7 @@ app.use(passport.session());
 
 app.use(routes);
 // Syncing our database and logging a message to the user upon success
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",

@@ -27,9 +27,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "sequelize": "^6.6.2"
-  },
-  "bugs": {
-    "url": "https://github.com/saibhreas/parks-out/issues"
-  },
-  "homepage": "https://github.com/saibhreas/parks-out"
+  }
+
+  
 }

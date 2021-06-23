@@ -29,10 +29,7 @@ router.get("/where2go", isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, "../../public/where2go.html"));
 });
 
-router.get("/home", (req, res) => {
-  console.log("GET /home");
-  res.sendFile(path.join(__dirname, "../../public/index.html"));
-});
+
 
 router.get("/", (req, res) => {
   console.log("GET /");
@@ -40,7 +37,7 @@ router.get("/", (req, res) => {
   if (req.user) {
     res.redirect("/where2go");
   }
-  res.sendFile(path.join(__dirname, "../../public/index.html"));
+  res.sendFile(path.join(__dirname, "../../public/home.html"));
 });
 
 module.exports = router;
