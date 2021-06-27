@@ -43,27 +43,20 @@ router.post("/signup", function (req, res) {
 router.post(
   "/login",
   (req, res, next) => {
-
-    passport.authenticate("local", (err, user, info) => {
-      if (err) { return res.status(500).json(err); }
-      if (!user) {
-        return res.status(500).json(err);
-      }
-      req.logIn(user, (err) => {
-        if (err) {
-          res.status(500).send(err);
-        }
-        res.json(user);
-      });
-    })(req, res, next);
-
-  });
-
+    console.log("POST api/v1/auth/login invoked");
+    next();
+  },
+  passport.authenticate("local"),
+  (req, res) => {
+    console.log("POST /api/v1/auth/login", req.user);
+    res.json(req.user);
+  }
+);
 
 // [GET] /api/v1/auth/logout
 router.get("/logout", function (req, res) {
   req.logout();
-  res.redirect('/login');
+  res.sendStatus(200);
 });
 
 // *! must issue a get method using the url below to display user name

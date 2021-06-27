@@ -4,7 +4,6 @@ const session = require("express-session");
 const sequelize = require("./config/connection");
 const routes = require("./controller");
 const axios = require('axios').default;
-var cookieParser = require('cookie-parser');
 
 // Requiring passport as we've configured it
 const passport = require("./config/passport");
@@ -15,8 +14,7 @@ const PORT = process.env.PORT || 8080;
 // Creating express app and configuring middleware needed for authentication
 const app = express();
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(cookieParser());
+app.use(express.json());          
 
 // *! everything in the public folder will use an absolute 
 // *! path which is why you can use /assets
@@ -34,7 +32,7 @@ app.use(passport.session());
 
 app.use(routes);
 // Syncing our database and logging a message to the user upon success
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",

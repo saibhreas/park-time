@@ -95,24 +95,3 @@ h4 {
     max-width: 100%;
   }
 }
-
-
-.weather-day {
-  display: flex;
-  flex-direction: column;
-  background: #d9ead9;
-  border-radius: 4px;
-}
-
-.park-info-item {
-  background: #dbe2d7;
-}
-
-#list-of-parks {
-  height: 400px;
-  overflow-y: auto;
-}
-.scrollable-park-info {
-  overflow-y: auto;
-    height: 700px;
-}
